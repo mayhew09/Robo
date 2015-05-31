@@ -19,32 +19,29 @@ public class DetailsActivity extends Activity {
         setContentView(R.layout.activity_details);
         if (savedInstanceState == null) {
             Intent in = getIntent();
-    //
+    // Gets all the Data from TestDataActiviy
             String profileID = in.getStringExtra("JobId");
 
             String city = TestDataActvity.getCity(profileID);
             String plz = TestDataActvity.getPLZ(profileID);
             String street = TestDataActvity.getStreet(profileID);
             String[] tasks = TestDataActvity.getTasks(profileID);
-
-                Log.d("tasks", tasks[1]);
-
-
             String[] requirement = TestDataActvity.getRequirements(profileID);
             String employer = TestDataActvity.getEmployer(profileID);
             String jobTitle = TestDataActvity.getJobTitle(profileID);
+            // needed? Meeting on Tuesday
             //  Date beginning = TestDataActvity.getBeginnning(profileID);
             Log.d("Detaisl", "Details funktioniert1");
+            // not necessary at the moment
             //job = new JobObject(profileID, jobTitle, employer, requirement, tasks, street, plz, city);
-
-            Log.d("Detaisl", "Details funktioniert2");
+            // get all TextViews to fill them
             TextView text3 = (TextView) findViewById(R.id.textView3);
             TextView text4 = (TextView) findViewById(R.id.textView4);
             TextView text5 = (TextView) findViewById(R.id.textView5);
             TextView text6 = (TextView) findViewById(R.id.textView6);
             TextView text7 = (TextView) findViewById(R.id.textView7);
-            Log.d("Detaisl", "Details funktioniert3");
 
+           // sets the data for the Textviews
             text3.setText(jobTitle);
             text4.setText(employer);
             text5.setText(street);

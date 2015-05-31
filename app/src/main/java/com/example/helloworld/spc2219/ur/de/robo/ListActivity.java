@@ -20,25 +20,30 @@ import java.util.ArrayList;
 
 /**
  * Created by Christine on 29.05.2015.
+ *
+ * contains the Listview with JobObjects
  */
 
 public class ListActivity extends Activity {
 
     ArrayList<JobObject> list = new ArrayList<>();
     ListView listView;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        Log.d("Ha", "zumindest das klappt");
+
         if (savedInstanceState == null) {
             TextView text = (TextView) findViewById(R.id.textView2);
+            // not needed right now
             // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+            // gets the ID Array from the Intent from the TestDataActivity
             Intent in = getIntent();
             String[] IDs = in.getStringArrayExtra("JobIds");
 
 
-
+            // sets the employer,title and the id value of all JobObjects. Adds it also to the JobObject ArrayList
 
             for (int i = 0; i < IDs.length; i++) {
                JobObject ob =  new JobObject(IDs[i]);
@@ -51,6 +56,8 @@ public class ListActivity extends Activity {
             }
 
 
+            // creates new JobObject Array Adapter and sets the Adaper to the ListView of the activity.
+
 
             final ArrayAdapter<JobObject> ad = new ArrayAdapter<JobObject>(this, android.R.layout.simple_list_item_1,list );
 
@@ -60,21 +67,22 @@ public class ListActivity extends Activity {
 
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+                // gets the item that is selected and starts an Intent to the DetailsActivity
+                // with the selected JobID
                 @Override
                 public void onItemClick(AdapterView<?> parent, final View view,
                                         int position, long id) {
-                    final String item = (String) parent.getItemAtPosition(position).toString();
-                    Log.d("yeó", item);
 
                     final JobObject item2 = (JobObject) parent.getItemAtPosition(position);
                     String id2 = item2.getID();
-                    Log.d("id",id2); Intent nextScreen = new Intent(getApplicationContext(), DetailsActivity.class);
+
+                    Intent nextScreen = new Intent(getApplicationContext(), DetailsActivity.class);
 
                     Log.d("What", "ListStarten") ;
                     nextScreen.putExtra("JobId",id2);
                     startActivity(nextScreen);
 
+                    // I'm not sure for what that is needed?
 
                     /*view.animate().setDuration(2000).alpha(0)
                             .withEndAction(new Runnable() {
@@ -90,6 +98,7 @@ public class ListActivity extends Activity {
             });
         }
 
+        // not used!
 /*private class StableArrayAdapter extends ArrayAdapter<String> {
 
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

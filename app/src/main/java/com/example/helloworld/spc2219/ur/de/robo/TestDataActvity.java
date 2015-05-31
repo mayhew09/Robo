@@ -11,6 +11,11 @@ import java.util.Date;
 
 /**
  * Created by Christine on 29.05.2015.
+ * Just filled with getMethods.
+ * After the intent from the MainActiviy the class sends an intent witha an StringArray with the IDs
+ * to the ListActivity class
+ *
+ * Is used in ListActiviy and DetailsActivity
  */
 public class TestDataActvity extends Activity{
 
@@ -21,6 +26,8 @@ public class TestDataActvity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_test);
        if (savedInstanceState == null) {
+
+           // gets the cityname/plznumber from the intent and starts an intent to the ListActivity with the ID Array.
             TextView text = (TextView) findViewById(R.id.textView);
             Intent i = getIntent();
 

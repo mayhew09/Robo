@@ -4,7 +4,9 @@ import java.util.Date;
 
 /**
  * Created by Christine on 29.05.2015.
+ * is used at the moment in ListActivity
  */
+
 public class JobObject {
 
     String id;
@@ -18,11 +20,12 @@ public class JobObject {
     String plz;
     String city;
 
+    // At the moment only the first constructor is used at ListActivity
     public JobObject(String id_o) {
         id = id_o;
 
     }
-
+    // not used
     public JobObject(String id_o, String employer_o, String title_o, String[] requirements_o, String[] tasks_o, String street_o, String plz_o, String city_o) {
         this.id = id_o;
         employer = employer_o;
@@ -36,6 +39,7 @@ public class JobObject {
 
     }
     @Override
+    // is used at Listactiviy to get the String that is displayed in the Listview for the object
     public String toString() {
         if (employer != null && title != null) {
             return employer + " " + title;
@@ -48,7 +52,7 @@ public class JobObject {
     public String getID(){
         return  id;
     }
-
+    //not used
     public String getEmployer(int id) {
         if (employer != null){
             return employer;

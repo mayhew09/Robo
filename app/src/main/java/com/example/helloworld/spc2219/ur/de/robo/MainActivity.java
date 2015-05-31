@@ -26,14 +26,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-
+            // creates the First Fragent which contains the normal search interface
             createFirstFragment();
 
             setUp();
         }
 
     }
-
+    // to be finished
     private void setUp() {
         setGpsButtonListener();
        // setProfileCheckBox();
@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     private void setGpsButtonListener() {
 
     }
-
+    // Intent to the TestdataActivity with the plz number/ city name is started
     private void startIntentToDataBase(String city) {
         Intent nextScreen = new Intent(getApplicationContext(), TestDataActvity.class);
         nextScreen.putExtra("City",city);
@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
         startActivity(nextScreen);
 
     }
-
+        // creates normal search Fragment
     private void createFirstFragment() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new FirstFragment())
@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-
+      // creats OptionsMenu, nothing changed from the original setup
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * Ap laceholder fragment containing a simple view.
+     * The Fragment which contains the normal search view
     */
     public  class FirstFragment extends Fragment implements View.OnClickListener{
 
@@ -95,18 +95,19 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            // Sets Listener on Search Button
             Button button = (Button) rootView.findViewById(R.id.buttonSearch);
-            // button.setText("sdfs");
             button.setOnClickListener(this);
-            Log.d("XE","SER");
+
 
             return rootView;
         }
-
+            // By clicking the search Button an intent to the testdataActivity is started with the city/plz name
             public void onClick(View v) {
              EditText edittext = (EditText) findViewById(R.id.editCity);
               String city =  edittext.getText().toString();
-                Log.e("textblub", city);
+
                 startIntentToDataBase(city);
             }
 
@@ -138,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
-
+// just copied from the above, needs to be done
     public  class ProfileFragment extends Fragment implements View.OnClickListener{
 
         public ProfileFragment() {
