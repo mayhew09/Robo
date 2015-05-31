@@ -15,7 +15,7 @@ import java.util.Date;
  * After the intent from the MainActiviy the class sends an intent witha an StringArray with the IDs
  * to the ListActivity class
  *
- * Is used in ListActiviy and DetailsActivity
+ * Is used in ListActiviy and DetailsActivity.
  */
 public class TestDataActvity extends Activity{
 

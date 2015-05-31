@@ -19,7 +19,7 @@ import junit.framework.Test;
 import java.util.ArrayList;
 
 /**
- * Created by Christine on 29.05.2015.
+ * Created by Christine on 29.05.2015
  *
  * contains the Listview with JobObjects
  */

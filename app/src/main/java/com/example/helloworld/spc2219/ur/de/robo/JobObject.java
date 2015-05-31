@@ -52,7 +52,7 @@ public class JobObject {
     public String getID(){
         return  id;
     }
-    //not used
+    //not used.
     public String getEmployer(int id) {
         if (employer != null){
             return employer;

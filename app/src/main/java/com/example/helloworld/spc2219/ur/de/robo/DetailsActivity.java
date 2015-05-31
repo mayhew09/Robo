@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 /**
- * Created by Christine on 29.05.2015.
+ * Created by Christine on 29.05.2015
  */
 public class DetailsActivity extends Activity {
     JobObject job;
