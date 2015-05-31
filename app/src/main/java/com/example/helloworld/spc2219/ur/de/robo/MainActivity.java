@@ -43,10 +43,11 @@ public class MainActivity extends ActionBarActivity {
 
     }
     // Intent to the TestdataActivity with the plz number/ city name is started
-    private void startIntentToDataBase(String city) {
+    private void startIntentToDataBase(String city, String branche) {
         Intent nextScreen = new Intent(getApplicationContext(), TestDataActvity.class);
-        nextScreen.putExtra("City",city);
-        Log.d("What","CityStarten") ;
+        String [] searchData = {city,branche};
+        nextScreen.putExtra("SearchData",searchData);
+        Log.d("What","SearchData") ;
         startActivity(nextScreen);
 
     }
@@ -105,15 +106,18 @@ public class MainActivity extends ActionBarActivity {
         }
             // By clicking the search Button an intent to the testdataActivity is started with the city/plz name
             public void onClick(View v) {
-             EditText edittext = (EditText) findViewById(R.id.editCity);
-              String city =  edittext.getText().toString();
-
-                startIntentToDataBase(city);
+                EditText editCity = (EditText) findViewById(R.id.editCity);
+                String city = editCity.getText().toString();
+                Log.e("textblub", city);
+                EditText editBranche = (EditText) findViewById(R.id.editBranche);
+                String branche = editBranche.getText().toString();
+                Log.e("textblub", branche);
+                startIntentToDataBase(city, branche);
             }
 
     }
 
-    public  class FavoriteFragment extends Fragment implements View.OnClickListener{
+   /* public  class FavoriteFragment extends Fragment implements View.OnClickListener{
 
         public FavoriteFragment() {
 
@@ -132,10 +136,13 @@ public class MainActivity extends ActionBarActivity {
         }
 
         public void onClick(View v) {
-            EditText edittext = (EditText) findViewById(R.id.editCity);
-            String city =  edittext.getText().toString();
+            EditText editCity = (EditText) findViewById(R.id.editCity);
+            String city =  editCity.getText().toString();
             Log.e("textblub", city);
-            startIntentToDataBase(city);
+            EditText editBranche = (EditText) findViewById(R.id.editBranche);
+            String branche =  editBranche.getText().toString();
+            Log.e("textblub", branche);
+            startIntentToDataBase(city,branche);
         }
 
     }
@@ -162,8 +169,9 @@ public class MainActivity extends ActionBarActivity {
             EditText edittext = (EditText) findViewById(R.id.editCity);
             String city =  edittext.getText().toString();
             Log.e("textblub", city);
-            startIntentToDataBase(city);
+            //startIntentToDataBase(city);
         }
 
     }
+    */
 }

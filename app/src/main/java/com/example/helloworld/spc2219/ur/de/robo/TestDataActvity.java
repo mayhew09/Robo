@@ -30,10 +30,11 @@ public class TestDataActvity extends Activity{
            // gets the cityname/plznumber from the intent and starts an intent to the ListActivity with the ID Array.
             TextView text = (TextView) findViewById(R.id.textView);
             Intent i = getIntent();
+           String[] jobData = i.getStringArrayExtra("SearchData");
+
 
 
             Intent nextScreen = new Intent(getApplicationContext(), ListActivity.class);
-
             Log.d("What", "ListStarten") ;
            nextScreen.putExtra("JobIds",ids);
             startActivity(nextScreen);
