@@ -52,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
         startActivity(nextScreen);
 
     }
-      // creates normal search Fragment
+     // creates normal search Fragment
     private void createFirstFragment() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new FirstFragment())
