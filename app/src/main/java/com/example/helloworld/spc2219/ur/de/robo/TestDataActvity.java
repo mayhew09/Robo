@@ -78,7 +78,7 @@ public class TestDataActvity extends Activity{
     public static String[] getRequirements(String st){
         if(st.equals("14")) {
            String[] yo = {"Java","Programmierkentnisse"};
-
+//
             return yo;
         }
         else{
