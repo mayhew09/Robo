@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Robo</string>
+    <string name="Input_Text">Bitte geben Sie einen Standort ein:</string>
+    <string name="action_settings">Settings</string>
+    <string name="GPS_Button">GPS</string>
+    <string name="City_Input">93456</string>
+    <string name="Controll_Profil">Profildaten verwenden</string>
+    <string name="Button_Search">Suchen</string>
+    <string name="example_branche">IT</string>
+
+
+</resources>
