@@ -31,6 +31,11 @@
             android:label="TestDataActivity">
 
         </activity>
+        <activity
+            android:name="com.example.helloworld.spc2219.ur.de.robo._TestDataMainActivity"
+            android:label="TestDataMainActivity">
+
+        </activity>
     </application>
 
 </manifest>
