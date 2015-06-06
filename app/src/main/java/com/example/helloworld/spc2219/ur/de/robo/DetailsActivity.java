@@ -12,40 +12,43 @@ import java.util.Date;
  * Created by Christine on 29.05.2015
  */
 public class DetailsActivity extends Activity {
-    JobObject job;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         if (savedInstanceState == null) {
+            // gets the ID from the intent from ListActivity
             Intent in = getIntent();
-    // Gets all the Data from TestDataActiviy
-            String profileID = in.getStringExtra("JobId");
+            String profileIDString = in.getStringExtra("JobId");
+            int profileID = Integer.parseInt(profileIDString);
 
-            String city = TestDataActvity.getCity(profileID);
-            String plz = TestDataActvity.getPLZ(profileID);
-            String street = TestDataActvity.getStreet(profileID);
-            String[] tasks = TestDataActvity.getTasks(profileID);
-            String[] requirement = TestDataActvity.getRequirements(profileID);
-            String employer = TestDataActvity.getEmployer(profileID);
-            String jobTitle = TestDataActvity.getJobTitle(profileID);
-            // needed? Meeting on Tuesday
-            //  Date beginning = TestDataActvity.getBeginnning(profileID);
-            Log.d("Detaisl", "Details funktioniert1");
-            // not necessary at the moment
-            //job = new JobObject(profileID, jobTitle, employer, requirement, tasks, street, plz, city);
+            // gets a jobs object with the profileID
+            _DataBaseHandler db = new _DataBaseHandler(getApplicationContext());
+            _Jobs job = db.getJob(profileID);
+
+            // gets the data from the job object
+            String jobTitle = job.methode_getJobTitle();
+            String employer = job.methode_getEmployer() ;
+            int plz = job.methode_getPlz();
+            String plzString = Integer.toString(plz);
+            String branche = job.methode_getBranche();
+
             // get all TextViews to fill them
             TextView text3 = (TextView) findViewById(R.id.textView3);
             TextView text4 = (TextView) findViewById(R.id.textView4);
             TextView text5 = (TextView) findViewById(R.id.textView5);
+
+            // not needed right now
             TextView text6 = (TextView) findViewById(R.id.textView6);
             TextView text7 = (TextView) findViewById(R.id.textView7);
 
-           // sets the data for the Textviews
+           // sets the data for the textviews
             text3.setText(jobTitle);
             text4.setText(employer);
-            text5.setText(street);
-          StringBuilder builder = new StringBuilder();
+            text5.setText(plzString);
+
+     // requirements and tasks are not included at the moment
+        /*  StringBuilder builder = new StringBuilder();
           for (String s : tasks) {
                 builder.append(s + " ");
                 text6.setText(builder.toString());
@@ -54,9 +57,9 @@ public class DetailsActivity extends Activity {
           for (String s2 : requirement) {
                 builder.append(s2 + " ");
                 text7.setText(builder.toString());
+           */
 
 
-          }
 
 
         }

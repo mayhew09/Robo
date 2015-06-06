@@ -319,7 +319,11 @@ public class _DataBaseHandler extends SQLiteOpenHelper {
 
     // Getting single job
     public _Jobs getJob(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
+
+        _Jobs job1 = new _Jobs("Werksstudent im IT-Bereich", "XY GmbH", 93047, "IT");
+
+        return  job1;
+       /* SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_JOBS, new String[]{KEY_JOB_ID,
                         KEY_JOB_TITLE, KEY_EMPLOYER, KEY_JOB_PLZ, KEY_JOB_BRANCHE}, KEY_JOB_ID + "=?",
@@ -331,9 +335,13 @@ public class _DataBaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)), cursor.getString(3));
         // return single job
         return jobs;
+        */
+
+
+
     }
 
-    public List<_Jobs> getAllJobs() {
+    public List<_Jobs> method_getAllJobs() {
         List<_Jobs> jobList = new ArrayList<_Jobs>();
         _Jobs job1 = new _Jobs("Werksstudent im IT-Bereich", "XY GmbH", 93047, "IT");
         _Jobs job2 = new _Jobs("Studentische Aushilfe", "XY GmbH", 93047, "IT");

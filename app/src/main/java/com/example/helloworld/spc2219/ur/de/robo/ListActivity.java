@@ -17,16 +17,18 @@ import android.widget.Toast;
 import junit.framework.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Christine on 29.05.2015
  *
  * contains the Listview with JobObjects
+ *
  */
 
 public class ListActivity extends Activity {
 
-    ArrayList<JobObject> list = new ArrayList<>();
+    List<_Jobs> list ;
     ListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,54 +37,56 @@ public class ListActivity extends Activity {
 
         if (savedInstanceState == null) {
             TextView text = (TextView) findViewById(R.id.textView2);
+
             // not needed right now
             // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-            // gets the ID Array from the Intent from the TestDataActivity
+            // gets the Search Data Array from the Intent from the MainActivity
             Intent in = getIntent();
-            String[] IDs = in.getStringArrayExtra("JobIds");
+            String[] quickSearchData = in.getStringArrayExtra("SearchData");
+            list = method_executeQuickSearch(quickSearchData);
+        }
 
 
-            // sets the employer,title and the id value of all JobObjects. Adds it also to the JobObject ArrayList
+        // isn't necessary anymore as the DataBaseHandler class gives an list of the jobs back
 
-            for (int i = 0; i < IDs.length; i++) {
-               JobObject ob =  new JobObject(IDs[i]);
+            /*for (int i = 0; i < IDs.length; i++) {
+                _Jobs job =  new JobObject(IDs[i]);
                 ob.setEmployer(TestDataActvity.getEmployer(IDs[i]));
                 ob.setTitle(TestDataActvity.getJobTitle(IDs[i]));
                 list.add(i,ob);
                 Log.d("ids", IDs[i]);
+                }
+                */
 
 
-            }
+        // creates new JobObject Array Adapter and sets the Adaper to the ListView of the activity.
+        // IF getallJobs() works, does  it need the SimpleCurserAdapter???
+
+        final ArrayAdapter<_Jobs> ad = new ArrayAdapter<_Jobs>(this, android.R.layout.simple_list_item_1, list);
+
+        listView = (ListView) findViewById(R.id.list);
+        listView.setAdapter(ad);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // gets the item that is selected and starts an Intent to the DetailsActivity
+            // with the selected JobID
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view,
+                                    int position, long id) {
+
+                final _Jobs job = (_Jobs) parent.getItemAtPosition(position);
+
+                Integer id2 = job.methode_getId();
 
 
-            // creates new JobObject Array Adapter and sets the Adaper to the ListView of the activity.
+                Intent nextScreen = new Intent(getApplicationContext(), DetailsActivity.class);
+
+                nextScreen.putExtra("JobId", Integer.toString(id2));
+                startActivity(nextScreen);
 
 
-            final ArrayAdapter<JobObject> ad = new ArrayAdapter<JobObject>(this, android.R.layout.simple_list_item_1,list );
-
-            listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(ad);
-            Log.d("s", "Arraylist geht");
-
-            listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                // gets the item that is selected and starts an Intent to the DetailsActivity
-                // with the selected JobID
-                @Override
-                public void onItemClick(AdapterView<?> parent, final View view,
-                                        int position, long id) {
-
-                    final JobObject item2 = (JobObject) parent.getItemAtPosition(position);
-                    String id2 = item2.getID();
-
-                    Intent nextScreen = new Intent(getApplicationContext(), DetailsActivity.class);
-
-                    Log.d("What", "ListStarten") ;
-                    nextScreen.putExtra("JobId",id2);
-                    startActivity(nextScreen);
-
-                    // I'm not sure for what that is needed?
+                // I'm not sure for what that is needed? Maybe Animation :)
 
                     /*view.animate().setDuration(2000).alpha(0)
                             .withEndAction(new Runnable() {
@@ -93,10 +97,23 @@ public class ListActivity extends Activity {
                                     view.setAlpha(1);
                                 }
                             });*/
-                }
+            }
 
-            });
+        });
+
+    }
+
+        private List<_Jobs> method_executeQuickSearch (String[] quickSearchData) {
+            // creates a QuickSearch Object with the Searchdata (plz, branche)
+            // the method where it is handed over needs to be done
+            _QuickSearch quick = new _QuickSearch(Integer.parseInt(quickSearchData[0]),quickSearchData[1]);
+
+            // gets all Jobs of the database
+            _DataBaseHandler db = new _DataBaseHandler(getApplicationContext());
+            List<_Jobs> jobList= db.method_getAllJobs();
+            return jobList;
         }
+
 
         // not used!
 /*private class StableArrayAdapter extends ArrayAdapter<String> {
@@ -124,5 +141,5 @@ public class ListActivity extends Activity {
 
 }
 */
-    }
+
 }

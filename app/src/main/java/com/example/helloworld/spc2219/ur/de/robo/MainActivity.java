@@ -1,8 +1,12 @@
 package com.example.helloworld.spc2219.ur.de.robo;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
+import java.lang.Integer;
+import java.util.List;
+
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -26,34 +30,36 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            // creates the First Fragent which contains the normal search interface
-            createFirstFragment();
+            // creates the First Fragment which contains the normal search interface
+            method_createFirstFragment();
 
-            setUp();
+            method_setUp();
         }
-
-    }
-    // to be finished
-    private void setUp() {
-        setGpsButtonListener();
-       // setProfileCheckBox();
-
     }
 
-    private void setGpsButtonListener() {
 
-    }
-    // Intent to the TestdataActivity with the plz number/ city name is started
-    private void startIntentToDataBase(String city, String branche) {
-        Intent nextScreen = new Intent(getApplicationContext(), TestDataActvity.class);
-        String [] searchData = {city,branche};
-        nextScreen.putExtra("SearchData",searchData);
+    // was used to test if the DataBaseHandler class worked. There was an error report.
+
+    private void method_setIntentToDataMain() {
+        Intent nextScreen = new Intent(getApplicationContext(), _TestDataMainActivity.class);
         Log.d("What","SearchData") ;
         startActivity(nextScreen);
+    }
+
+
+    // to be finished by Patrick
+    private void method_setUp() {
+        method_setGpsButtonListener();
+
 
     }
-     // creates normal search Fragment
-    private void createFirstFragment() {
+
+    private void method_setGpsButtonListener() {
+
+    }
+
+     // creates normal qucikSearch Fragment
+    private void method_createFirstFragment() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, new FirstFragment())
                 .commit();
@@ -85,9 +91,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * The Fragment which contains the normal search view
+     * The Fragment which contains the QucikSearch view
     */
-    public  class FirstFragment extends Fragment implements View.OnClickListener{
+    public class FirstFragment extends Fragment {
 
         public FirstFragment() {
 
@@ -98,57 +104,61 @@ public class MainActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-            // Sets Listener on Search Button
-            Button button = (Button) rootView.findViewById(R.id.buttonSearch);
-            button.setOnClickListener(this);
+            // Sets listener on Search Button
+            Button buttonSearch = (Button) rootView.findViewById(R.id.buttonSearch);
+            buttonSearch.setOnClickListener(new View.OnClickListener() {
 
+                public void onClick(View v) {
+                    method_createQuickSearchInput();
+                }
+            });
+            // sets listener on profile button
+            Button buttonProfile = (Button) rootView.findViewById(R.id.buttonProfile);
+            buttonProfile.setOnClickListener(new View.OnClickListener() {
 
-            return rootView;
-        }
-            // By clicking the search Button an intent to the testdataActivity is started with the city/plz name
-            public void onClick(View v) {
-                EditText editCity = (EditText) findViewById(R.id.editCity);
-                String city = editCity.getText().toString();
-                Log.e("textblub", city);
-                EditText editBranche = (EditText) findViewById(R.id.editBranche);
-                String branche = editBranche.getText().toString();
-                Log.e("textblub", branche);
-                startIntentToDataBase(city, branche);
-            }
-
-    }
-
-   /* public  class FavoriteFragment extends Fragment implements View.OnClickListener{
-
-        public FavoriteFragment() {
-
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_favorite, container, false);
-            Button button = (Button) rootView.findViewById(R.id.buttonSearch);
-            // button.setText("sdfs");
-            button.setOnClickListener(this);
-            Log.d("XE","SER");
+                public void onClick(View v) {
+                    getSupportFragmentManager().beginTransaction().replace
+                            (R.id.container,new ProfileFragment ())
+                            .commit();
+                }
+            });
 
             return rootView;
         }
 
-        public void onClick(View v) {
+            // gets the data from the editTexts of the QuickSearch
+        private void method_createQuickSearchInput() {
             EditText editCity = (EditText) findViewById(R.id.editCity);
-            String city =  editCity.getText().toString();
-            Log.e("textblub", city);
+            String plzString = editCity.getText().toString();
+
+
             EditText editBranche = (EditText) findViewById(R.id.editBranche);
-            String branche =  editBranche.getText().toString();
+            String branche = editBranche.getText().toString();
             Log.e("textblub", branche);
-            startIntentToDataBase(city,branche);
+
+
+
+            method_startIntentToListActivity(plzString,branche);
+
+        }
+        // starts intent that has the searchData Array to the List Activity
+        private void method_startIntentToListActivity(String plz, String branche) {
+            Intent nextScreen = new Intent(getApplicationContext(), ListActivity.class);
+            String [] searchData = {plz,branche};
+            nextScreen.putExtra("SearchData",searchData);
+            Log.d("What","SearchData") ;
+            startActivity(nextScreen);
         }
 
+
+
+
     }
-// just copied from the above, needs to be done
-    public  class ProfileFragment extends Fragment implements View.OnClickListener{
+
+   /*
+       sets up the Profile View
+    */
+    public class ProfileFragment extends Fragment{
 
         public ProfileFragment() {
 
@@ -158,21 +168,60 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main_profile, container, false);
-            Button button = (Button) rootView.findViewById(R.id.buttonSearch);
-            // button.setText("sdfs");
-            button.setOnClickListener(this);
-            Log.d("XE","SER");
+
+            //sets Listener to the Button Suche mit Profildaten starten
+            Button buttonProfileSearch = (Button) rootView.findViewById(R.id.buttonProfileSearch);
+            buttonProfileSearch.setOnClickListener(new View.OnClickListener() {
+                                        // to be finished
+                                          public void onClick(View v) {
+                                             // method_createProfileSearchInput();
+
+                                          }
+                                      });
+            // sets Listener on the Button Quick which goes back to the quickSearchFragment
+            Button buttonBack = (Button) rootView.findViewById(R.id.quickSearchButton);
+            buttonBack.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    getSupportFragmentManager().beginTransaction().replace
+                            (R.id.container,new FirstFragment ())
+                            .commit();
+
+                }
+            });
+
 
             return rootView;
         }
 
-        public void onClick(View v) {
-            EditText edittext = (EditText) findViewById(R.id.editCity);
-            String city =  edittext.getText().toString();
-            Log.e("textblub", city);
-            //startIntentToDataBase(city);
+       // to be finished
+    /*
+        private void method_createProfileSearchInput() {
+            EditText editText1 = (EditText) findViewById(R.id.editText);
+            String name = editText1.getText().toString();
+
+            EditText editText2 = (EditText) findViewById(R.id.editText2);
+            String graduation = editText2.getText().toString();
+
+            // EditText3 and 4 are not used as the constructor is not updated
+
+            Log.e("textblub", graduation);
+
+
+
+            method_startIntentToListActivity(name,graduation);
+
         }
 
+        private void method_startIntentToListActivity(String name, String graduation) {
+            Intent nextScreen = new Intent(getApplicationContext(), ListActivity.class);
+            String [] searchData = {name,graduation};
+            nextScreen.putExtra("SearchData",searchData);
+            Log.d("What","SearchData") ;
+            startActivity(nextScreen);
+        }
+
+        */
     }
-    */
+
 }
