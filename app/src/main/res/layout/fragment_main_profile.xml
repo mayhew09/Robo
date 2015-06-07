@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:text="x?"
+        android:text="Angebotsart"
         android:layout_below="@+id/quickSearchButton"
         android:layout_centerHorizontal="true" />
 
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
-        android:text="x?"
+        android:text="Branchenfilter"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true" />
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText3"
-        android:text="x?"
+        android:text="Arbeitszeit"
         android:layout_below="@+id/editText2"
         android:layout_centerHorizontal="true" />
 
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText4"
-        android:text="x?"
+        android:text="Ort/PLZ"
         android:layout_below="@+id/editText3"
         android:layout_centerHorizontal="true" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="GPS einschalten"
         android:id="@+id/switchGPS"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/seekBar"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -69,5 +69,25 @@
         android:id="@+id/buttonProfileSearch"
         android:layout_below="@+id/buttonSaveProfile"
         android:layout_centerHorizontal="true" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/editText4"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_alignLeft="@+id/editText4"
+        android:layout_alignStart="@+id/editText4" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Umkreis"
+        android:id="@+id/textView8"
+        android:layout_alignBottom="@+id/seekBar"
+        android:layout_toLeftOf="@+id/editText3"
+        android:layout_toStartOf="@+id/editText3" />
 
 </RelativeLayout>
