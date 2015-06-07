@@ -90,4 +90,14 @@
         android:layout_toLeftOf="@+id/editText3"
         android:layout_toStartOf="@+id/editText3" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="20 km"
+        android:id="@+id/textView9"
+        android:layout_above="@+id/switchGPS"
+        android:layout_toRightOf="@+id/editText"
+        android:layout_toEndOf="@+id/editText" />
+
 </RelativeLayout>
