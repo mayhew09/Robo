@@ -47,6 +47,21 @@ public class DetailsActivity extends Activity {
             text4.setText(employer);
             text5.setText(plzString);
 
+            // FÜR ZWISCHENPRÜFUNG
+            if (job.methode_getJobTitle().equals("Werksstudent im IT-Bereich")){
+            }
+            else{
+                if(job.methode_getJobTitle().equals("Studentische Aushilfe")){
+                    text6.setText("Android Kenntisse");
+                    text7.setText("Dokumentation");
+                }
+                else{
+
+                    text6.setText("SQL Kenntisse");
+                    text7.setText("Client-Server-Kommunikation");
+                }
+            }
+
      // requirements and tasks are not included at the moment
         /*  StringBuilder builder = new StringBuilder();
           for (String s : tasks) {

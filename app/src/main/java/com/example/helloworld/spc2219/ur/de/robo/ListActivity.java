@@ -77,7 +77,20 @@ public class ListActivity extends Activity {
 
                 final _Jobs job = (_Jobs) parent.getItemAtPosition(position);
 
-                Integer id2 = job.methode_getId();
+                //Integer id2 = job.methode_getId();
+                int id2;
+                // FÜR ZWISCHENPRÄSENTATION
+                if (job.methode_getJobTitle().equals("Werksstudent im IT-Bereich")){
+                  id2 = 1;
+                }
+                else{
+                    if(job.methode_getJobTitle().equals("Studentische Aushilfe")){
+                        id2 = 2;
+                    }
+                    else{
+                        id2 = 3;
+                    }
+                }
 
 
                 Intent nextScreen = new Intent(getApplicationContext(), DetailsActivity.class);

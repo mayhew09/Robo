@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -320,9 +321,28 @@ public class _DataBaseHandler extends SQLiteOpenHelper {
     // Getting single job
     public _Jobs getJob(int id) {
 
-        _Jobs job1 = new _Jobs("Werksstudent im IT-Bereich", "XY GmbH", 93047, "IT");
+        if (id == 1) {
 
-        return  job1;
+            _Jobs job1 = new _Jobs("Werksstudent im IT-Bereich", "XY GmbH", 93047, "IT");
+
+            return job1;
+        }
+
+        if (id == 2) {
+
+            _Jobs job2 = new _Jobs("Studentische Aushilfe", "XY GmbH", 93047, "IT");
+            return job2;
+        }
+        if (id == 3) {
+
+            _Jobs job3 = new _Jobs("Software-Entwickler", "Muster AG", 93049, "Entwicklung");
+
+            return job3;
+        }
+        return null;
+    }
+
+
        /* SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_JOBS, new String[]{KEY_JOB_ID,
@@ -339,7 +359,6 @@ public class _DataBaseHandler extends SQLiteOpenHelper {
 
 
 
-    }
 
     public List<_Jobs> method_getAllJobs() {
         List<_Jobs> jobList = new ArrayList<_Jobs>();
